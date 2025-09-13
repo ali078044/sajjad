@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام إدارة جداول الأطباء</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Login Icon Button -->
+  <div id="login-icon-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+      <polyline points="10 17 15 12 10 7" />
+      <line x1="15" y1="12" x2="3" y2="12" />
+    </svg>
+  </div>
+
+  <!-- Public View -->
+  <div id="publicViewContainer" class="container">
+    <h2>عرض جداول الأقسام</h2>
+    <p>اختر قسماً لعرض الجدول الأسبوعي الموافق عليه.</p>
+    <div class="form-group">
+      <label for="departmentFilter">اختر القسم</label>
+      <select id="departmentFilter">
+        <option value="">-- يرجى الانتظار --</option>
+      </select>
+    </div>
+    <div id="publicSchedulesContainer"></div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeLoginModal">&times;</span>
+      <h2>تسجيل الدخول</h2>
+      <form id="loginForm">
+        <div class="form-group"><label for="username">اسم الموظف</label><input type="text" id="username" required></div>
+        <div class="form-group"><label for="password">الرمز</label><input type="password" id="password" required></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">دخول</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Application Container (for logged-in users) -->
+  <div id="appContainer" class="container hidden">
+    <!-- Employee Dashboard -->
+    <div id="dashboardView" class="dashboard-view hidden">
+      <div id="userInfo"><span id="welcomeMessage"></span><button id="logoutBtn" class="btn btn-secondary btn-sm">تسجيل
+          الخروج</button></div>
+      <div class="dashboard-buttons"><button id="showAddScheduleBtn" class="btn btn-primary">إضافة جدول جديد</button><button
+          id="showPreviousSchedulesBtn" class="btn btn-secondary">عرض الجداول المقدمة</button></div>
+      <div id="contentArea"></div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboardView" class="admin-dashboard-view hidden">
+      <div id="adminUserInfo"><span id="adminWelcomeMessage"></span><button id="adminLogoutBtn"
+          class="btn btn-secondary btn-sm">تسجيل الخروج</button></div>
+      <div class="dashboard-buttons">
+        <button id="showUserManagementBtn" class="btn btn-primary">إدارة الموظفين</button>
+        <button id="showScheduleReviewBtn" class="btn btn-secondary">مراجعة الجداول</button>
+        <button id="showWeeklySummaryBtn" class="btn btn-secondary">خلاصة الأسبوع</button>
+      </div>
+      <div id="adminContentArea"></div>
+    </div>
+  </div>
+
+  <!-- Global Message Area -->
+  <div id="messageArea" class="message-container"></div>
+  
+  <!-- Global Loader -->
+  <div id="loader" class="hidden">
+    <div class="spinner"></div>
+    <p>جاري التحميل...</p>
+  </div>
+
+  <!-- Edit User Modal -->
+  <div id="editUserModal" class="modal">
+    <div class="modal-content"><span class="close-btn" id="closeEditUserModal">&times;</span>
+      <h2>تعديل بيانات الموظف</h2>
+      <form id="editUserForm">
+        <input type="hidden" id="edit-original-username">
+        <div class="form-group"><label for="edit-username">اسم الموظف</label><input type="text" id="edit-username"
+            required></div>
+        <div class="form-group"><label for="edit-password">الرمز (اتركه فارغاً لعدم التغيير)</label><input
+            type="password" id="edit-password"></div>
+        <div class="form-group"><label for="edit-department">القسم</label><input type="text" id="edit-department"
+            required></div>
+        <div class="form-group"><label for="edit-telegramId">معرف التليجرام</label><input type="text"
+            id="edit-telegramId"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">حفظ التعديلات</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
